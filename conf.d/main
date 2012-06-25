@@ -11,3 +11,7 @@ DOMAIN=www.example.com
 SRC=/usr/local/src
 WEBROOT=/var/www/ezpublish
 
+# tweak apache-credit
+CONF=/etc/apache2/mods-available/substitute.conf
+sed -i "s|</body>|</footer>|g" $CONF
+
