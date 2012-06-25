@@ -38,6 +38,7 @@ a2enmod rewrite
 
 # start services
 /etc/init.d/mysql start
+/etc/init.d/apache2 start
 
 # setup the database
 MYSQL_BATCH="mysql --user=root --password=$MYSQL_PASS --batch"
@@ -101,6 +102,23 @@ Comments=
 Send=false
 EOF
 
+# setup local ez package archive for installation
+mv $SRC/ezpublish $WEBROOT/
+sed -i "s|127.0.0.1.*|127.0.0.1 localhost packages.ez.no|" /etc/hosts
+
+# curl based install
+URL="http://127.0.0.1/index.php"
+CURL="curl -c /tmp/cookie -b /tmp/cookie"
+$CURL $URL --data "eZSetupWizardLanguage=eng-GB&eZSetup_current_step=Welcome&eZSetup_next_button=Next+%3E"
+rm -f /tmp/cookie
+mv $WEBROOT/.htaccess_root $WEBROOT/.htaccess
+
+# cleanup
+rm $WEBROOT/kickstart.ini
+rm -rf $WEBROOT/ezpublish
+sed -i "s|127.0.0.1.*|127.0.0.1 localhost|" /etc/hosts
+
 # stop services
 /etc/init.d/mysql stop
+/etc/init.d/apache2 stop
 
