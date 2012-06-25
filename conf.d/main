@@ -46,6 +46,61 @@ MYSQL_ADMIN="mysqladmin --user=root --password=$MYSQL_PASS"
 $MYSQL_ADMIN create $DB_NAME
 $MYSQL_BATCH --execute "grant all privileges on $DB_NAME.* to $DB_USER@localhost identified by '$DB_PASS'; flush privileges;"
 
+# preseed installation
+cat >$WEBROOT/kickstart.ini<<EOF
+[email_settings]
+Continue=true
+Type=mta
+
+[database_choice]
+Continue=true
+Type=mysqli
+
+[database_init]
+Continue=true
+Server=localhost
+Port=3306
+Database=$DB_NAME
+User=$DB_USER
+Password=$DB_PASS
+
+[language_options]
+Continue=true
+Primary=eng-GB
+
+[site_types]
+Continue=true
+Site_package=ezdemo_site
+
+[site_access]
+Continue=true
+Access=url
+
+[site_details]
+Continue=true
+Title=TurnKey Ez Publish
+URL=http://$DOMAIN
+Access=site
+AdminAccess=site_admin
+Database=ezpublish
+DatabaseAction=remove
+
+[site_admin]
+Continue=true
+FirstName=Admin
+LastName=User
+Email=$ADMIN_MAIL
+Password=$ADMIN_PASS
+
+[security]
+Continue=true
+
+[registration]
+Continue=true
+Comments=
+Send=false
+EOF
+
 # stop services
 /etc/init.d/mysql stop
 
