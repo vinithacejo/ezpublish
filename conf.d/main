@@ -123,6 +123,10 @@ chmod 640 $WEBROOT/settings/siteaccess/eng/site.ini.append.php
 chmod 640 $WEBROOT/settings/siteaccess/site/site.ini.append.php
 chmod 640 $WEBROOT/settings/siteaccess/site_admin/site.ini.append.php
 
+# clear cache
+cd $WEBROOT
+su www-data -c "php5 bin/php/ezcache.php --clear-all --purge --no-colors"
+
 # stop services
 /etc/init.d/mysql stop
 /etc/init.d/apache2 stop
