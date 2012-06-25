@@ -118,6 +118,11 @@ rm $WEBROOT/kickstart.ini
 rm -rf $WEBROOT/ezpublish
 sed -i "s|127.0.0.1.*|127.0.0.1 localhost|" /etc/hosts
 
+# secure sensitive files
+chmod 640 $WEBROOT/settings/siteaccess/eng/site.ini.append.php
+chmod 640 $WEBROOT/settings/siteaccess/site/site.ini.append.php
+chmod 640 $WEBROOT/settings/siteaccess/site_admin/site.ini.append.php
+
 # stop services
 /etc/init.d/mysql stop
 /etc/init.d/apache2 stop
