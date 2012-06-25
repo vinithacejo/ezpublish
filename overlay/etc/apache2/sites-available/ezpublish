@@ -1,0 +1,24 @@
+NameVirtualHost *:80
+NameVirtualHost *:443
+
+<VirtualHost *:80>
+    UseCanonicalName Off
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/ezpublish/
+</VirtualHost>
+
+<VirtualHost *:443>
+    SSLEngine on
+    SSLCertificateFile /etc/ssl/certs/cert.pem
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/ezpublish/
+</VirtualHost>
+
+<Directory /var/www/ezpublish/>
+    Options +FollowSymLinks
+    AllowOverride All
+    order allow,deny
+    allow from all
+    RedirectMatch ^/admin /site_admin
+</Directory>
+
