@@ -15,3 +15,14 @@ WEBROOT=/var/www/ezpublish
 CONF=/etc/apache2/mods-available/substitute.conf
 sed -i "s|</body>|</footer>|g" $CONF
 
+# unpack and set permissions
+tar -zxf $SRC/ezpublish_*.tar.gz -C $(dirname $WEBROOT)
+mv $(dirname $WEBROOT)/ezpublish_* $WEBROOT
+rm $SRC/ezpublish_*.tar.gz
+
+chown -R root:root $WEBROOT
+chown -R www-data:www-data $WEBROOT/var
+chown -R www-data:www-data $WEBROOT/design
+chown -R www-data:www-data $WEBROOT/settings
+chown -R www-data:www-data $WEBROOT/extension
+
