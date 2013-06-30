@@ -25,7 +25,7 @@ Credentials *(passwords set at first boot)*
 -------------------------------------------
 
 - Webmin, SSH, MySQL, phpMyAdmin: username **root**
-- eZ publish: username **admin@example.com**
+- eZ publish: username is email set on first boot
 
 
 .. _eZ publish: http://ez.no/
