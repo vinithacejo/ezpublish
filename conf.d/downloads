@@ -6,9 +6,8 @@ dl() {
 }
 
 
-VER="128248/694464/version/1/file/ezpublish_community_project-2012.5-with_ezc.tar.gz"
+VER="161942/957955/version/7/file/ezpublish5_community_project-2014.11.1-gpl-full.tar.gz"
 URL="http://share.ez.no/content/download/$VER"
 
 cd /usr/local/src
 curl -L -f -O $URL
-
